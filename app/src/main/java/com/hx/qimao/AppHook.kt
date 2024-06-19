@@ -13,17 +13,6 @@ class AppHook: IXposedHookLoadPackage {
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         if (lpparam.packageName == "com.kmxs.reader") {
             XposedBridge.log("start hook...")
-            XposedHelpers.findAndHookMethod(
-                "com.qimao.qmuser.model.entity.mine_v2.BaseInfo",
-                lpparam.classLoader,
-                "getIs_vip",
-                object : XC_MethodHook() {
-                    @Throws(Throwable::class)
-                    override fun afterHookedMethod(param: MethodHookParam) {
-                        super.afterHookedMethod(param)
-                        param.result = "1"
-                    }
-                })
             XposedHelpers.findAndHookMethod("rh", lpparam.classLoader, "isVipUser",
                 Context::class.java, object : XC_MethodHook() {
 
@@ -39,6 +28,14 @@ class AppHook: IXposedHookLoadPackage {
                     override fun afterHookedMethod(param: MethodHookParam) {
                         super.afterHookedMethod(param)
                         param.result = "1"
+                    }
+                })
+            XposedHelpers.findAndHookMethod("fx3", lpparam.classLoader, "A0",
+                Context::class.java, object : XC_MethodHook() {
+                    @Throws(Throwable::class)
+                    override fun afterHookedMethod(param: MethodHookParam) {
+                        super.afterHookedMethod(param)
+                        param.result = true
                     }
                 })
             XposedHelpers.findAndHookMethod(
