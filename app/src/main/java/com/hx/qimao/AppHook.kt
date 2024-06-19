@@ -14,43 +14,10 @@ class AppHook: IXposedHookLoadPackage {
         if (lpparam.packageName == "com.kmxs.reader") {
             XposedBridge.log("start hook...")
             XposedHelpers.findAndHookMethod(
-                "b7",
-                lpparam.classLoader,
-                "isNoAdRewardExpire",
-                object : XC_MethodHook() {
-                    @Throws(Throwable::class)
-                    override fun afterHookedMethod(param: MethodHookParam) {
-                        super.afterHookedMethod(param)
-                        param.result = false
-                    }
-                })
-            XposedHelpers.findAndHookMethod(
-                "b7",
-                lpparam.classLoader,
-                "isVideoRewardExpire",
-                object : XC_MethodHook() {
-
-                    @Throws(Throwable::class)
-                    override fun afterHookedMethod(param: MethodHookParam) {
-                        super.afterHookedMethod(param)
-                        param.result = false
-                    }
-                })
-            XposedHelpers.findAndHookMethod("fx3", lpparam.classLoader, "A0",
-                Context::class.java, object : XC_MethodHook() {
-
-                    @Throws(Throwable::class)
-                    override fun afterHookedMethod(param: MethodHookParam) {
-                        super.afterHookedMethod(param)
-                        param.result = true
-                    }
-                })
-            XposedHelpers.findAndHookMethod(
                 "com.qimao.qmuser.model.entity.mine_v2.BaseInfo",
                 lpparam.classLoader,
                 "getIs_vip",
                 object : XC_MethodHook() {
-
                     @Throws(Throwable::class)
                     override fun afterHookedMethod(param: MethodHookParam) {
                         super.afterHookedMethod(param)
@@ -68,7 +35,6 @@ class AppHook: IXposedHookLoadPackage {
                 })
             XposedHelpers.findAndHookMethod("fx3", lpparam.classLoader, "Y",
                 Context::class.java, object : XC_MethodHook() {
-
                     @Throws(Throwable::class)
                     override fun afterHookedMethod(param: MethodHookParam) {
                         super.afterHookedMethod(param)
